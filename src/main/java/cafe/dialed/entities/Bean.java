@@ -2,6 +2,7 @@ package cafe.dialed.entities;
 
 import cafe.dialed.entities.enums.Process;
 import cafe.dialed.entities.enums.RoastLevel;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ public class Bean {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User user;
 
     @Column(nullable = false)
@@ -31,7 +33,7 @@ public class Bean {
     @Enumerated(EnumType.STRING)
     private RoastLevel roastLevel;
 
-    private Integer packageWeight;
+    private Double packageWeight;
     private Double currentWeight;
     private Boolean isDecaf;
 
@@ -43,4 +45,6 @@ public class Bean {
 
     @Lob
     private String notes;
+
+    private Boolean isArchived;
 }

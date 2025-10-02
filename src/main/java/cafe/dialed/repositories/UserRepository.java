@@ -1,4 +1,8 @@
 package cafe.dialed.repositories;
 
-public interface UserRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import cafe.dialed.entities.*;
+import java.util.UUID;
+
+public interface UserRepository extends JpaRepository<User, UUID> {
 }
