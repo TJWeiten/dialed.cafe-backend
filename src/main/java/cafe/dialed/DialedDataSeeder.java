@@ -13,8 +13,8 @@ import java.util.UUID;
 import java.time.LocalDate;
 
 @Component
-@Profile("local") // Only runs when the 'dev' profile is active
-@RequiredArgsConstructor // Lombok constructor for all final fields
+@Profile("local")
+@RequiredArgsConstructor
 public class DialedDataSeeder implements CommandLineRunner {
 
     private final UserRepository userRepository;
