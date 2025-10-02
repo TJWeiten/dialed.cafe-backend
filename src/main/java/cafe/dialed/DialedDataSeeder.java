@@ -13,7 +13,7 @@ import java.util.UUID;
 import java.time.LocalDate;
 
 @Component
-@Profile("local")
+@Profile({"local", "production"})
 @RequiredArgsConstructor
 public class DialedDataSeeder implements CommandLineRunner {
 

@@ -1,22 +1,30 @@
 package cafe.dialed;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.clerk.backend_api.Clerk;
 import com.clerk.backend_api.models.errors.ClerkErrors;
 import com.clerk.backend_api.models.operations.GetEmailAddressResponse;
 import com.clerk.backend_api.models.operations.GetPublicInterstitialResponse;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class DialedApplication {
 
+    @Value("${my.config.check:--CONFIG NOT FOUND--}")
+    private String configCheck;
+
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(DialedApplication.class, args);
-//        Clerk sdk = Clerk.builder()
-//                .bearerAuth(System.getenv().getOrDefault("BEARER_AUTH", ""))
-//                .build();
-//        GetPublicInterstitialResponse res = sdk.miscellaneous().getPublicInterstitial()
-//                .call();
 	}
+
+    @Bean
+    CommandLineRunner commandLineRunner() {
+        return args -> {
+            System.out.println("✅✅✅ My Config Check: " + configCheck + " ✅✅✅");
+        };
+    }
 
 }
