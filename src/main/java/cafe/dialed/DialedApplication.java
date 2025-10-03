@@ -13,18 +13,8 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class DialedApplication {
 
-    @Value("${my.config.check:--CONFIG NOT FOUND--}")
-    private String configCheck;
-
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(DialedApplication.class, args);
 	}
-
-    @Bean
-    CommandLineRunner commandLineRunner() {
-        return args -> {
-            System.out.println("✅✅✅ My Config Check: " + configCheck + " ✅✅✅");
-        };
-    }
 
 }

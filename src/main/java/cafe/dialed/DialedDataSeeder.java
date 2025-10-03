@@ -29,8 +29,7 @@ public class DialedDataSeeder implements CommandLineRunner {
 
         // --- Create Users ---
         User user1 = userRepository.save(User.builder()
-            .oauthProvider("google")
-            .oauthId("101234567890123456789")
+            .oauthId("user_33V6NwRrkOS8mZt7q8L6UhyA7q1")
             .email("tsubaki@kouryuu.me")
             .firstName("Tsubaki")
             .lastName("Kouryuu")
@@ -38,7 +37,6 @@ public class DialedDataSeeder implements CommandLineRunner {
         );
 
         User user2 = userRepository.save(User.builder()
-            .oauthProvider("apple")
             .oauthId("987654321")
             .email("hello@tjweiten.com")
             .firstName("T.J.")
@@ -47,8 +45,7 @@ public class DialedDataSeeder implements CommandLineRunner {
         );
 
         User user3 = userRepository.save(User.builder()
-            .oauthProvider("apple")
-            .oauthId("987654321")
+            .oauthId("sasd_987654321231")
             .email("emptyemptyphil@empty.com")
             .firstName("Empty")
             .lastName("Phil")

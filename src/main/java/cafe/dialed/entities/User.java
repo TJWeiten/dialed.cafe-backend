@@ -18,15 +18,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false)
-    private String oauthProvider;
-
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String oauthId;
 
-    @Column(nullable = false, unique = true)
     private String email;
-
     private String firstName;
     private String lastName;
 
