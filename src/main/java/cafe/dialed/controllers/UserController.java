@@ -20,11 +20,4 @@ public class UserController {
         return Map.of("message", String.format("Hi %s! I'm Spring Boot. Warm welcome to User ID: %s!", fullName, oauthProviderId));
     }
 
-    @GetMapping("/auth")
-    public Map<String, String> findOrCreateUser(@AuthenticationPrincipal Jwt jwt) {
-        String oauthProviderId = jwt.getSubject();
-        System.out.println("oauthProviderId = " + oauthProviderId + " | Requested auth! Finding user (or creating, if doesn't exist)...");
-        return Map.of("message", String.format("%s", oauthProviderId));
-    }
-
 }

@@ -47,6 +47,8 @@ public class ClerkWebhookController {
         try {
             Webhook webhook = new Webhook(webhookSecret);
 
+            // This was surprisingly difficult to figure out, since the documentation is wrong...
+            // The key appears to be Collections.singletonList and not asList()?
             Map<String, List<String>> headersMap = new HashMap<>();
             headersMap.put("svix-id", Collections.singletonList(svixId));
             headersMap.put("svix-timestamp", Collections.singletonList(svixTimestamp));
