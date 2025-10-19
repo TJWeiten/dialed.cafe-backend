@@ -26,6 +26,7 @@ public class SecurityConfig {
     @Value("#{'${app.cors.allowed-origins}'.split(',')}")
     private List<String> allowedOrigins;
 
+    /* LOCAL SECURITY FOR TESTING PURPOSES ONLY */
     @Bean
     @Profile("local")
     public SecurityFilterChain localFilterChain(HttpSecurity http) throws Exception {
@@ -37,8 +38,8 @@ public class SecurityConfig {
             // All endpoints require authentication
             .authorizeHttpRequests(authorize -> authorize
                     .requestMatchers(toH2Console()).permitAll()
-                    .requestMatchers("/webhooks/**").permitAll() // webhooks can be hit by anyone
-                    .anyRequest().authenticated() // all other requests must be authenticated!
+                    .requestMatchers("/webhooks/**").permitAll() // Webhooks can be hit by anyone
+                    .anyRequest().authenticated() // All other requests must be authenticated!
             )
             // Configure OAuth2 Resource Server to process JWTs
             .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
@@ -47,6 +48,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /* PRODUCTION SECURITY RULES */
     @Bean
     @Profile("production")
     public SecurityFilterChain productionFilterChain(HttpSecurity http) throws Exception {
