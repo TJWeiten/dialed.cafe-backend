@@ -37,7 +37,7 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             // All endpoints require authentication
             .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers("/healthcheck/**").permitAll() // Allows Coolify (or, well, anyone) to confirm the API is working
+                    .requestMatchers("/healthcheck").permitAll() // Allows Coolify (or, well, anyone) to confirm the API is working
                     .requestMatchers(toH2Console()).permitAll()
                     .requestMatchers("/webhooks/**").permitAll() // Webhooks can be hit by anyone
                     .anyRequest().authenticated() // All other requests must be authenticated!
@@ -60,7 +60,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 // All endpoints require authentication
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/healthcheck/**").permitAll() // Allows Coolify (or, well, anyone) to confirm the API is working
+                        .requestMatchers("/healthcheck").permitAll() // Allows Coolify (or, well, anyone) to confirm the API is working
                         .requestMatchers("/webhooks/**").permitAll() // webhooks can be hit by anyone
                         .anyRequest().authenticated() // all other requests must be authenticated!
                 )
