@@ -66,8 +66,9 @@ public class ClerkWebhookController {
                 userService.updateOrCreateUser(clerkEvent.data());
             } else if (clerkEvent.type().equals("user.deleted")) {
                 userService.deleteUser(clerkEvent.data());
-            } else if (clerkEvent.type().equals("email.created")) {
-                userService.updateOrCreateUser(clerkEvent.data());
+            } else {
+                System.out.println("Unclear webhook of type: " + clerkEvent.type());
+                return ResponseEntity.status(200).body("This webhook is unimplemented");
             }
 
             System.out.println("Webhook: " + clerkEvent.type() + " processed!");
@@ -76,9 +77,8 @@ public class ClerkWebhookController {
         } catch (WebhookVerificationException e) {
             System.out.println("Webhook FAILED: " + e.toString());
             return ResponseEntity.status(400).body("Webhook verification failed");
-        } catch (JsonMappingException e) {
-            throw new RuntimeException(e);
         } catch (JsonProcessingException e) {
+            System.out.println("Processing of webhook CRASHED: " + e.toString());
             throw new RuntimeException(e);
         }
 
