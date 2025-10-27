@@ -39,9 +39,9 @@ public class BeanController {
         return userRepository.findAll();
     }
 
-    @GetMapping("/user/{userId}") // Responds to GET requests at /beans/user/{userId}
-    public List<Bean> getBeansByUser(@PathVariable UUID userId) {
-        return beanRepository.findByUserId(userId);
-    }
+//    @GetMapping("/user/{userId}") // Responds to GET requests at /beans/user/{userId}
+//    public List<Bean> getBeansByUser(@PathVariable UUID userId) {
+//        return beanRepository.findByUserId(userId);
+//    }
 
 }

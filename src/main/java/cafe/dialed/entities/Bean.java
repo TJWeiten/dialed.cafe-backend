@@ -35,7 +35,7 @@ public class Bean {
 
     private Double packageWeight;
     private Double currentWeight;
-    private Boolean isDecaf;
+    private boolean isDecaf;
 
     @Enumerated(EnumType.STRING)
     private Process process;
@@ -46,5 +46,6 @@ public class Bean {
     @Lob
     private String notes;
 
-    private Boolean isArchived;
+    private boolean archived = false;
+    private boolean deleted = false;
 }

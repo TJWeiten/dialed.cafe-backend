@@ -4,7 +4,9 @@ import cafe.dialed.controllers.clerk.ClerkUserData;
 import cafe.dialed.entities.User;
 import cafe.dialed.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class UserService {
@@ -23,11 +25,13 @@ public class UserService {
     }
 
     public User findByOauthId(String oauthId) {
-        return userRepository.findByOauthId(oauthId);
+        return userRepository.findByOauthId(oauthId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ERROR: User record not found"));
     }
 
     public void updateOrCreateUser(ClerkUserData data) {
-        User user = userRepository.findByOauthId(data.id());
+        User user = userRepository.findByOauthId(data.id())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ERROR: User record not found"));
         if (user == null) {
             userRepository.save(createUser(
                     data.id(),
@@ -44,7 +48,8 @@ public class UserService {
     }
 
     public void deleteUser(ClerkUserData data) {
-        User user = userRepository.findByOauthId(data.id());
+        User user = userRepository.findByOauthId(data.id())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ERROR: User record not found"));
         userRepository.delete(user);
     }
 

@@ -27,9 +27,14 @@ public class Grinder {
     @Enumerated(EnumType.STRING)
     private BurrType burrType;
 
-    private Boolean isStepless;
+    private boolean isStepless;
     private String grindRange;
 
     @Lob
     private String notes;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    private boolean deleted = false;
 }

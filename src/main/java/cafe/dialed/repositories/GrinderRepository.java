@@ -7,4 +7,5 @@ import java.util.UUID;
 
 public interface GrinderRepository extends JpaRepository<Grinder, UUID> {
     List<Grinder> findByUserId(UUID userId);
+    List<Grinder> findByUserIdAndDeletedFalse(UUID userId);
 }
