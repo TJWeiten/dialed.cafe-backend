@@ -28,8 +28,15 @@ public class DialedDataSeeder implements CommandLineRunner {
         System.out.println("--- Development Profile Active: Seeding database with CommandLineRunner... ---");
 
         // --- Create Users ---
-        User user1 = userRepository.save(User.builder()
+        User userLocal = userRepository.save(User.builder()
             .oauthId("user_33V6NwRrkOS8mZt7q8L6UhyA7q1")
+            .email("tsubaki@kouryuu.me")
+            .firstName("Tsubaki")
+            .lastName("Kouryuu")
+            .build()
+        );
+        User userTempProd = userRepository.save(User.builder()
+            .oauthId("user_33WwVuO2DfkWEe9e6WC7EiZxilV")
             .email("tsubaki@kouryuu.me")
             .firstName("Tsubaki")
             .lastName("Kouryuu")
@@ -38,7 +45,7 @@ public class DialedDataSeeder implements CommandLineRunner {
 
         // --- Create Beans ---
         beanRepository.save(Bean.builder()
-            .user(user1)
+            .user(userLocal)
             .name("Ethiopia Guji Natural")
             .roaster("Stumptown")
             .roastLevel(RoastLevel.LIGHT)
@@ -47,7 +54,7 @@ public class DialedDataSeeder implements CommandLineRunner {
             .build()
         );
         beanRepository.save(Bean.builder()
-            .user(user1)
+            .user(userLocal)
             .name("Colombia La Palma")
             .roaster("Heart Roasters")
             .roastLevel(RoastLevel.MEDIUM)
@@ -56,7 +63,7 @@ public class DialedDataSeeder implements CommandLineRunner {
             .build()
         );
         beanRepository.save(Bean.builder()
-            .user(user1)
+            .user(userLocal)
             .name("Kenya AA Nyeri")
             .roaster("Blue Bottle")
             .roastLevel(RoastLevel.LIGHT)
@@ -67,7 +74,7 @@ public class DialedDataSeeder implements CommandLineRunner {
 
         // --- Create Grinders ---
         grinderRepository.save(Grinder.builder()
-            .user(user1)
+            .user(userLocal)
             .name("Mazzer Philos (Stepped)")
             .burrType(BurrType.FLAT)
             .isStepless(false)
@@ -77,7 +84,7 @@ public class DialedDataSeeder implements CommandLineRunner {
             .build()
         );
         grinderRepository.save(Grinder.builder()
-            .user(user1)
+            .user(userLocal)
             .name("Mazzer Philos (Stepless)")
             .burrType(BurrType.FLAT)
             .isStepless(true)
@@ -87,7 +94,7 @@ public class DialedDataSeeder implements CommandLineRunner {
             .build()
         );
         grinderRepository.save(Grinder.builder()
-            .user(user1)
+            .user(userLocal)
             .name("Weber EG-1")
             .burrType(BurrType.FLAT)
             .isStepless(true)
@@ -98,7 +105,7 @@ public class DialedDataSeeder implements CommandLineRunner {
 
         // --- Create Sauces with Versions ---
         Sauce caramelSauce = sauceRepository.save(Sauce.builder()
-            .user(user1)
+            .user(userLocal)
             .name("Caramel Drizzle")
             .build()
         );
