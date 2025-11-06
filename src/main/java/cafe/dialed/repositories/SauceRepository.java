@@ -7,4 +7,6 @@ import java.util.UUID;
 
 public interface SauceRepository extends JpaRepository<Sauce, UUID> {
     List<Sauce> findByUserId(UUID userId);
+    List<Sauce> findByUserIdAndDeletedFalse(UUID userId);
+    long countByUserId(UUID userId);
 }

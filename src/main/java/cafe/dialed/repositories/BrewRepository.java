@@ -7,4 +7,5 @@ import java.util.UUID;
 
 public interface BrewRepository extends JpaRepository<Brew, UUID> {
     List<Brew> findByUserId(UUID userId);
+    long countByUserId(UUID userId);
 }

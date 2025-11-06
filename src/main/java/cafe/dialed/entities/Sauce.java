@@ -1,5 +1,6 @@
 package cafe.dialed.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.UUID;
@@ -23,7 +24,13 @@ public class Sauce {
     @Column(nullable = false)
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "latest_version_id")
+    @JsonManagedReference // i.e., DO serialize this side
     private SauceVersion latestVersion;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    private boolean deleted = false;
 }

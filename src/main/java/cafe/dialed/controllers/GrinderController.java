@@ -60,9 +60,9 @@ public class GrinderController {
         String oauthId = jwt.getSubject();
         User localUser = userRepository.findByOauthId(oauthId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ERROR: User record not found"));
-        List<Grinder> grinders = grinderRepository.findByUserId(localUser.getId());
+        long grinderCount = grinderRepository.countByUserId(localUser.getId());
         // Consider if users should be limited in number of entries they can upload?
-        if (grinders.size() >= MAX_GRINDERS) {
+        if (grinderCount >= MAX_GRINDERS) {
             String notificationSubject = String.format(
                     "USER HIT %s RESOURCE LIMIT",
                     GrinderController.class.getSimpleName().toUpperCase()
@@ -79,7 +79,7 @@ public class GrinderController {
             }
             throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS, "ERROR: You have hit the maximum amount of grinders allowed to prevent abuse");
         }
-        grinder.setId(null);
+        grinder.setId(null); // Forces creation of new entity in DB vs. allowing someone to overwrite
         grinder.setUser(localUser);
         return grinderRepository.save(grinder);
     }

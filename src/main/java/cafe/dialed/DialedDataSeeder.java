@@ -107,6 +107,7 @@ public class DialedDataSeeder implements CommandLineRunner {
         Sauce caramelSauce = sauceRepository.save(Sauce.builder()
             .user(userLocal)
             .name("Caramel Drizzle")
+            .imageUrl("https://res.cloudinary.com/dialed-cafe/image/upload/v1762382589/development/sauce_9a933f99-06b6-4165-b3ec-8bbbc30df9b2.jpg")
             .build()
         );
 
@@ -123,8 +124,23 @@ public class DialedDataSeeder implements CommandLineRunner {
 
         sauceVersionRepository.saveAll(List.of(caramelV1, caramelV2));
 
+        Sauce mochaSauce = sauceRepository.save(Sauce.builder()
+                .user(userLocal)
+                .name("Mocha Sauce")
+                .build()
+        );
+        SauceVersion mochaVersion = (SauceVersion.builder()
+                .sauce(mochaSauce)
+                .recipe("1 cup sugar, 1/2 cup water.\nA boat load of...\n\nEXPENSIVE\n\nchocolate!")
+                .build()
+        );
+
+        sauceVersionRepository.saveAll(List.of(mochaVersion));
+
         caramelSauce.setLatestVersion(caramelV2);
+        mochaSauce.setLatestVersion(mochaVersion);
         sauceRepository.save(caramelSauce);
+        sauceRepository.save(mochaSauce);
 
         System.out.println("--- Database seeding complete. ---");
 
