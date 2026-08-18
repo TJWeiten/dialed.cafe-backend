@@ -8,6 +8,7 @@ import cafe.dialed.services.CloudinaryService;
 import cafe.dialed.services.NotificationService;
 import com.resend.core.exception.ResendException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -50,7 +51,7 @@ public class BeanController {
         String oauthId = jwt.getSubject();
         User user = userRepository.findByOauthId(oauthId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ERROR: User record not found"));
-        return beanRepository.findByUserIdAndDeletedFalse(user.getId());
+        return beanRepository.findByUserIdAndDeletedFalse(user.getId(), Sort.by(Sort.Direction.DESC, "roastDate"));
     }
 
     @PostMapping({"", "/"})
@@ -95,6 +96,12 @@ public class BeanController {
             if (!existingBean.getUser().getId().equals(localUser.getId())) {
                 throw new ResponseStatusException(HttpStatus.FORBIDDEN, "ERROR: You do not have permission to edit this bean.");
             }
+        }
+        // Validate current weight does not exceed package weight
+        if (bean.getCurrentWeight() != null && bean.getPackageWeight() != null
+                && bean.getCurrentWeight() > bean.getPackageWeight()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "ERROR: Current weight cannot be greater than package weight");
         }
         bean.setUser(localUser);
         return beanRepository.save(bean);

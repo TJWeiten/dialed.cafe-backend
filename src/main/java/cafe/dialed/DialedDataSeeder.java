@@ -46,11 +46,24 @@ public class DialedDataSeeder implements CommandLineRunner {
         // --- Create Beans ---
         beanRepository.save(Bean.builder()
             .user(userLocal)
+            .name("Gamut")
+            .roaster("Chromatic Coffee Co.")
+            .roastLevel(RoastLevel.MEDIUM)
+            .archived(false)
+            .roastDate(LocalDate.now().minusDays(3))
+            .currentWeight(1000)
+            .packageWeight(1000)
+            .build()
+        );
+        beanRepository.save(Bean.builder()
+            .user(userLocal)
             .name("Ethiopia Guji Natural")
             .roaster("Stumptown")
             .roastLevel(RoastLevel.LIGHT)
             .archived(true)
             .roastDate(LocalDate.now().minusDays(10))
+            .currentWeight(0)
+            .packageWeight(1000)
             .build()
         );
         beanRepository.save(Bean.builder()
@@ -60,6 +73,8 @@ public class DialedDataSeeder implements CommandLineRunner {
             .roastLevel(RoastLevel.MEDIUM)
             .archived(true)
             .roastDate(LocalDate.now().minusDays(30))
+            .currentWeight(0)
+            .packageWeight(1000)
             .build()
         );
         beanRepository.save(Bean.builder()
@@ -69,6 +84,8 @@ public class DialedDataSeeder implements CommandLineRunner {
             .roastLevel(RoastLevel.LIGHT)
             .archived(false)
             .roastDate(LocalDate.now().minusDays(5))
+            .currentWeight(340)
+            .packageWeight(1000)
             .build()
         );
 
