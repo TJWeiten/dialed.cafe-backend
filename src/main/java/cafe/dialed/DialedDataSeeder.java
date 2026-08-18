@@ -51,8 +51,9 @@ public class DialedDataSeeder implements CommandLineRunner {
             .roastLevel(RoastLevel.MEDIUM)
             .archived(false)
             .roastDate(LocalDate.now().minusDays(3))
-            .currentWeight(1000)
-            .packageWeight(1000)
+            .currentWeight(Double.valueOf(1000))
+            .packageWeight(Double.valueOf(1000))
+            .imageUrl("https://res.cloudinary.com/dialed-cafe/image/upload/v1787095806/development/bean_b5eaedd4-c9c2-4c52-b8ec-88df7d1bb96f.jpg")
             .build()
         );
         beanRepository.save(Bean.builder()
@@ -62,8 +63,8 @@ public class DialedDataSeeder implements CommandLineRunner {
             .roastLevel(RoastLevel.LIGHT)
             .archived(true)
             .roastDate(LocalDate.now().minusDays(10))
-            .currentWeight(0)
-            .packageWeight(1000)
+            .currentWeight(Double.valueOf(0))
+            .packageWeight(Double.valueOf(1000))
             .build()
         );
         beanRepository.save(Bean.builder()
@@ -73,8 +74,8 @@ public class DialedDataSeeder implements CommandLineRunner {
             .roastLevel(RoastLevel.MEDIUM)
             .archived(true)
             .roastDate(LocalDate.now().minusDays(30))
-            .currentWeight(0)
-            .packageWeight(1000)
+            .currentWeight(Double.valueOf(0))
+            .packageWeight(Double.valueOf(1000))
             .build()
         );
         beanRepository.save(Bean.builder()
@@ -84,8 +85,8 @@ public class DialedDataSeeder implements CommandLineRunner {
             .roastLevel(RoastLevel.LIGHT)
             .archived(false)
             .roastDate(LocalDate.now().minusDays(5))
-            .currentWeight(340)
-            .packageWeight(1000)
+            .currentWeight(Double.valueOf(340))
+            .packageWeight(Double.valueOf(1000))
             .build()
         );
 
