@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface BeanRepository extends JpaRepository<Bean, UUID> {
-    List<Bean> findByUserId(UUID userId);
+    List<Bean> findByUserIdAndDeletedFalse(UUID userId);
     long countByUserId(UUID userId);
 }

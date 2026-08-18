@@ -43,6 +43,9 @@ public class Bean {
     private LocalDate roastDate;
     private String descriptors;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Lob
     private String notes;
 
