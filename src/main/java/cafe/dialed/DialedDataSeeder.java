@@ -120,6 +120,16 @@ public class DialedDataSeeder implements CommandLineRunner {
             .notes("The Core (DB-1) burrs are installed.")
             .build()
         );
+        grinderRepository.save(Grinder.builder()
+            .user(userLocal)
+            .name("BOOKOO Motto80")
+            .burrType(BurrType.FLAT)
+            .isStepless(true)
+            .grindRange("25 - 1500μm")
+            .notes("Using SweetCore80 Burrs, designed for espresso (as opposed to Omni80 burrs for filter and espresso). Adjustment is per μm. Variable from 300-1500 RPM. Can also adjust bean feed from approx. 0.5-2g/s.")
+            .imageUrl("https://res.cloudinary.com/dialed-cafe/image/upload/v1787108950/development/grinder_8d1fde53-a670-41d7-8c3e-2ae2c3141d7e.jpg")
+            .build()
+        );
 
         // --- Create Sauces with Versions ---
         Sauce caramelSauce = sauceRepository.save(Sauce.builder()
