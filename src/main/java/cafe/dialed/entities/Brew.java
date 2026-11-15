@@ -79,6 +79,8 @@ public class Brew {
     @Column(length = 512)
     private String copilotNotes;
     @Lob
+    private String copilotFeedback;
+    @Lob
     private String copilotComment;
     @Lob
     private String copilotChainOfThought;

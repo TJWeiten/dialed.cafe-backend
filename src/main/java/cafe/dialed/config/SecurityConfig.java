@@ -14,6 +14,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
+import jakarta.servlet.DispatcherType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,6 +39,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> authorize
                     .requestMatchers("/healthcheck").permitAll() // Allows Coolify (or, well, anyone) to confirm the API is working
                     .requestMatchers(toH2Console()).permitAll()
+                    .dispatcherTypeMatchers(DispatcherType.ASYNC).permitAll() // Allows async dispatches for co-pilot streaming
                     .requestMatchers("/webhooks/**").permitAll() // Webhooks can be hit by anyone
                     .anyRequest().authenticated() // All other requests must be authenticated!
             )
