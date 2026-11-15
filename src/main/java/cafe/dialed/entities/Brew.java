@@ -7,7 +7,7 @@ import cafe.dialed.entities.enums.Rating;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
 @Getter
@@ -26,21 +26,21 @@ public class Brew {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bean_id", nullable = false)
     private Bean bean;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "grinder_id", nullable = false)
     private Grinder grinder;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "sauce_version_id")
     private SauceVersion sauceVersion;
 
     @CreationTimestamp
     @Column(updatable = false, nullable = false)
-    private LocalDateTime brewDate;
+    private Instant brewDate;
 
     // Core Espresso Stats
     @Column(nullable = false)
@@ -66,11 +66,23 @@ public class Brew {
     private String waterType;
     @Enumerated(EnumType.STRING)
     private BasketType basketType;
-    private Integer basketSize;
+    private Integer basketSize; // not on frontend?
 
     // Final Drink Details
     @Enumerated(EnumType.STRING)
     private DrinkType madeAs;
     @Enumerated(EnumType.STRING)
     private MilkType milkType;
+    private Integer milkAmount;
+
+    // Barista Co-pilot
+    @Column(length = 512)
+    private String copilotNotes;
+    @Lob
+    private String copilotComment;
+    @Lob
+    private String copilotChainOfThought;
+
+    private boolean deleted = false;
+
 }
